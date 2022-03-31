@@ -17,6 +17,8 @@ package auth
 import (
 	"strconv"
 	"strings"
+
+	"oras.land/oras-go/internal/compat"
 )
 
 // Scheme define the authentication method.
@@ -99,7 +101,7 @@ func parseChallenge(header string) (scheme Scheme, params map[string]string) {
 		}
 
 		if rest[0] == '"' {
-			prefix, err := strconv.QuotedPrefix(rest)
+			prefix, err := compat.QuotedPrefix(rest)
 			if err != nil {
 				return
 			}
